@@ -12,4 +12,4 @@ A screenshot of the dino game is shown here. ![dino game](./dino_game/screenshot
 this folder contains code to build a snake game. a screen shot is shown here ![snake game](./snake_game/screenshot_snake.png)
 
 ## markdown rendering
-this html file convert markdown to html or pdf. render_markdown_final.html is the final usbale file. known issue is that it won't render equations like this $e^{i\pi}+1 = 0$.
+this html file convert markdown to html or pdf. render_markdown_final.html is the final usable file. known issue is that it won't render equations like this $e^{i\pi}+1 = 0$.
