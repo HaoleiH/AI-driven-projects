@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Editor with Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+        #editor, #preview {
+            width: 50%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        #editor {
+            border-right: 1px solid #ccc;
+        }
+        .btn {
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        #toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #editor textarea {
+            width: 100%;
+            height: calc(100% - 60px);
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            font-family: monospace;
+        }
+        .hljs {
+            background: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="editor">
+        <div id="toolbar">
+            <button class="btn" onclick="saveHTML()">Save as HTML</button>
+            <button class="btn" onclick="savePDF()">Save as PDF</button>
+        </div>
+        <textarea id="markdownInput" placeholder="Type or drag and drop your Markdown here..."></textarea>
+    </div>
+    <div id="preview"></div>
+
+    <script>
+        const editor = document.getElementById('markdownInput');
+        const preview = document.getElementById('preview');
+
+        editor.addEventListener('input', updatePreview);
+        editor.addEventListener('dragover', handleDragOver);
+        editor.addEventListener('drop', handleFileDrop);
+
+        function updatePreview() {
+            let markdownText = editor.value;
+            let html = marked.parse(markdownText); // Use marked.parse instead of marked
+            preview.innerHTML = html;
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+            MathJax.typesetPromise().catch(err => console.error('MathJax error:', err));
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        function handleFileDrop(event) {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    editor.value = e.target.result;
+                    updatePreview();
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function saveHTML() {
+            const htmlContent = preview.innerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'output.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function savePDF() {
+            const element = preview;
+            html2pdf().from(element).set({
+                margin: 10,
+                filename: 'output.pdf',
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            }).save();
+        }
+
+        updatePreview(); // Initial preview
+    </script>
+</body>
+</html>

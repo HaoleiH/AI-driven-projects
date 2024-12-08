@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Renderer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        #editor, #preview {
+            width: 80%;
+            height: 300px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #editor {
+            resize: both;
+            overflow: auto;
+        }
+        #preview {
+            background: #f9f9f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        #file-input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown Renderer</h1>
+    <textarea id="editor" placeholder="Type or paste your Markdown here..."></textarea>
+    <div id="preview"></div>
+    <input type="file" id="file-input" accept=".md,.markdown" />
+    <script>
+        // Function to render Markdown to HTML
+        function renderMarkdown(markdown) {
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(markdown);
+            document.getElementById('preview').innerHTML = html;
+        }
+
+        // Event listener for typing in the editor
+        document.getElementById('editor').addEventListener('input', function() {
+            const markdown = this.value;
+            renderMarkdown(markdown);
+        });
+
+        // Event listener for file input
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const markdown = e.target.result;
+                    document.getElementById('editor').value = markdown;
+                    renderMarkdown(markdown);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Drag and drop functionality
+        const dropArea = document.getElementById('editor');
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const markdown = e.target.result;
+                    document.getElementById('editor').value = markdown;
+                    renderMarkdown(markdown);
+                };
+                reader.readAsText(file);
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+</body>
+</html>

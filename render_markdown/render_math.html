@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .editor, .preview {
+            width: 50%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .editor {
+            border-right: 1px solid #ddd;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+        }
+
+        .preview {
+            overflow-y: auto;
+        }
+
+        #preview-output {
+            white-space: pre-wrap;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="editor">
+            <textarea id="markdown-input" placeholder="Type or drag and drop your markdown here..."></textarea>
+        </div>
+        <div class="preview">
+            <div id="preview-output"></div>
+        </div>
+    </div>
+    <div class="buttons">
+        <button id="save-html">Save as HTML</button>
+        <button id="save-pdf">Save as PDF</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.12/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const markdownInput = document.getElementById('markdown-input');
+            const previewOutput = document.getElementById('preview-output');
+            const saveHtmlButton = document.getElementById('save-html');
+            const savePdfButton = document.getElementById('save-pdf');
+
+            // Drag and drop functionality
+            markdownInput.addEventListener('dragover', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'copy';
+            });
+
+            markdownInput.addEventListener('drop', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        markdownInput.value = e.target.result;
+                        renderMarkdown();
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            // Render Markdown on input change
+            markdownInput.addEventListener('input', renderMarkdown);
+
+            // Render Markdown initially
+            renderMarkdown();
+
+            // Save as HTML
+            saveHtmlButton.addEventListener('click', () => {
+                const blob = new Blob([previewOutput.innerHTML], { type: 'text/html' });
+                saveAs(blob, 'markdown-preview.html');
+            });
+
+            // Save as PDF
+            savePdfButton.addEventListener('click', () => {
+                html2pdf().from(previewOutput).set({ margin: 10, filename: 'markdown-preview.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } }).save();
+            });
+
+            function renderMarkdown() {
+                let markdown = markdownInput.value;
+                let html = marked.parse(markdown);
+                html = html.replace(/<code class="language-(.*?)">/g, '<code class="hljs language-$1">');
+                previewOutput.innerHTML = html;
+                document.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+                MathJax.typeset();
+            }
+        });
+    </script>
+</body>
+</html>

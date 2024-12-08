@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Renderer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            border-right: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .panel:last-child {
+            border-right: none;
+        }
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .panel-header h2 {
+            margin: 0;
+        }
+        .panel-header button {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .panel-header button:hover {
+            background: #e0e0e0;
+        }
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        #editor {
+            background: #fff;
+            font-family: monospace;
+        }
+        #preview {
+            background: #f9f9f9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        #file-input {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown Renderer</h1>
+    <div class="container">
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Editor</h2>
+                <input type="file" id="file-input" accept=".md,.markdown" />
+            </div>
+            <div class="panel-content" id="editor" contenteditable="true" placeholder="Type or paste your Markdown here..."></div>
+        </div>
+        <div class="panel">
+            <div class="panel-header">
+                <h2>Preview</h2>
+                <button id="clear-button">Clear</button>
+            </div>
+            <div class="panel-content" id="preview"></div>
+        </div>
+    </div>
+    <script>
+        // Function to render Markdown to HTML
+        function renderMarkdown(markdown) {
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(markdown);
+            document.getElementById('preview').innerHTML = html;
+        }
+
+        // Event listener for typing in the editor
+        document.getElementById('editor').addEventListener('input', function() {
+            const markdown = this.innerHTML;
+            renderMarkdown(markdown);
+        });
+
+        // Event listener for file input
+        document.getElementById('file-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const markdown = e.target.result;
+                    document.getElementById('editor').innerHTML = markdown;
+                    renderMarkdown(markdown);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Drag and drop functionality
+        const dropArea = document.getElementById('editor');
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
+
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const markdown = e.target.result;
+                    document.getElementById('editor').innerHTML = markdown;
+                    renderMarkdown(markdown);
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Clear button functionality
+        document.getElementById('clear-button').addEventListener('click', function() {
+            document.getElementById('editor').innerHTML = '';
+            document.getElementById('preview').innerHTML = '';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+</body>
+</html>

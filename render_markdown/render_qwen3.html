@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        .editor, .preview {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+            overflow-y: auto;
+        }
+        .editor {
+            border-right: none;
+            resize: horizontal;
+        }
+        .preview {
+            background-color: #f9f9f9;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <!-- Include highlight.js styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+</head>
+<body>
+    <div class="container">
+        <textarea id="markdown-input" class="editor" placeholder="Type or drag and drop your Markdown here..."></textarea>
+        <div id="html-preview" class="preview"></div>
+    </div>
+    <div class="button-container">
+        <button id="save-button">Save as HTML</button>
+    </div>
+
+    <!-- Include marked library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Include highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+    <script>
+        const markdownInput = document.getElementById('markdown-input');
+        const htmlPreview = document.getElementById('html-preview');
+        const saveButton = document.getElementById('save-button');
+
+        // Function to convert markdown to HTML and apply syntax highlighting
+        function renderMarkdown() {
+            const markdownText = markdownInput.value;
+            htmlPreview.innerHTML = marked.parse(markdownText);
+            // Apply syntax highlighting to code blocks
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        }
+
+        // Event listener for input changes
+        markdownInput.addEventListener('input', renderMarkdown);
+
+        // Drag and drop functionality
+        markdownInput.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        markdownInput.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file && (file.type === 'text/markdown' || file.name.endsWith('.md'))) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    markdownInput.value = event.target.result;
+                    renderMarkdown();
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        // Save button functionality
+        saveButton.addEventListener('click', () => {
+            const blob = new Blob([htmlPreview.innerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'output.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // Initial render
+        renderMarkdown();
+    </script>
+</body>
+</html>
