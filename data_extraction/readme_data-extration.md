@@ -5,7 +5,9 @@
 using google's Gemini to extract data from scientific papers. also tried llama 3.2 vision, ChatGPT, google deplot. not as good as gemini. click button above to run in colab.
 
 orinigal graph
+
 ![example 2](example2.png)
 
 extracted graph
+
 ![result 2](extracted-result2.png)
