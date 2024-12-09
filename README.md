@@ -22,7 +22,7 @@ this html file convert markdown to html or pdf. render_markdown_final.html is th
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/data_extraction/Gemini_interface.ipynb)
 
-using google's Gemini to extract data from scientific papers. also tried llama 3.2 vision, ChatGPT, google deplot. not as good as gemini. click button above to run in colab.
+using google's Gemini to extract data from scientific papers. also tried llama 3.2 vision, ChatGPT, google deplot. not as good as gemini. click button above to run in colab. Check [this](./data_extraction/readme_data-extraction.md) to see an example
 
 This is one of the foundational components of a scientific Retrieval-Augmented Generation (RAG) large language model(LLM). The ultimate goal is to create a system similar to Google’s [NotebookLM](https://notebooklm.google.com/), enhanced with graph processing capabilities. This system would allow you to ask questions and receive answers from large language models based on the papers you provide.
 
