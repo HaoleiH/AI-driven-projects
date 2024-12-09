@@ -5,7 +5,7 @@ this repo contains some codes writen with the help of large language models like
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/data_extraction/Gemini_interface.ipynb)
 
-using google's Gemini to extract data from scientific papers. also tried llama 3.2 vision, ChatGPT, google deplot. not as good as gemini. click button above to run in colab. Check [this](./data_extraction/readme_data-extraction.md) to see an example
+using google's Gemini to extract data from scientific papers. also tried llama 3.2 vision, ChatGPT, google deplot. not as good as gemini. click button above to run in colab. Check [this](./data_extraction/readme_data-extraction.md) to see an example.
 
 This is one of the foundational components of a scientific Retrieval-Augmented Generation (RAG) large language model(LLM). The ultimate goal is to create a system similar to Google’s [NotebookLM](https://notebooklm.google.com/), enhanced with graph processing capabilities. This system would allow you to ask questions and receive answers from large language models based on the papers you provide.
 
@@ -33,7 +33,7 @@ A screenshot of the dino game is shown here. ![dino game](./dino_game/screenshot
 this folder contains code to build a snake game. a screen shot is shown here ![snake game](./snake_game/screenshot_snake.png)
 
 ## markdown rendering
-this html file convert markdown to html or pdf. render_markdown_final.html is the final usable file. known issue is that it won't render equations like this $e^{i\pi}+1 = 0$.
+this html file convert markdown to html or pdf. render_markdown_final.html is the final usable file and it is hosted [here](https://haoleih.github.io/HaoleiHui/manual/render_markdown.html). known issue is that it won't render equations like this $e^{i\pi}+1 = 0$.
 
 
 
