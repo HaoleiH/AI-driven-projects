@@ -1,6 +1,12 @@
 # AI-driven-projects
 this repo contains some codes writen with the help of large language models like ChatGPT and Qwen.
 
+## RAG using Llama3.2-3b
+
+[Open in Kaggle](https://www.kaggle.com/code/haoleihui/cp-rag-llms)
+
+Details in [README_RAG.md](./RAG-using-Llama3.2-3b)
+
 ## data extraction
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/data_extraction/Gemini_interface.ipynb)
