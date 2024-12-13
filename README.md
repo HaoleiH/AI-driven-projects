@@ -5,7 +5,7 @@ this repo contains some codes writen with the help of large language models like
 
 [Open in Kaggle](https://www.kaggle.com/code/haoleihui/cp-rag-llms)
 
-Details in [README_RAG.md](./RAG-using-Llama3.2-3b)
+Details in [README_RAG.md](./RAG-using-Llama3.2-3b/README_RAG.md)
 
 ## data extraction
 
