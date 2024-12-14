@@ -17,4 +17,5 @@ pdf input
 ![md](RAG-pdf.PNG)
 
 # Future plans
-Continuing from RAG with markdown input, we need to find a way to retrieve graph in input files.
+1. higher performance retrieving by using other vector data base like FAISS, Weaviate, Qdrant AND Chroma
+2. Continuing from RAG with markdown input, we need to find a way to retrieve graph in input files.
