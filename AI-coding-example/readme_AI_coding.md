@@ -1,0 +1,2 @@
+# AI coding exmaple on colab
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/data_extraction/Gemini_interface.ipynb)
