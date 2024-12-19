@@ -19,3 +19,15 @@ pdf input
 # Future plans
 1. higher performance retrieving by using other vector data base like FAISS, Weaviate, Qdrant AND Chroma
 2. Continuing from RAG with markdown input, we need to find a way to retrieve graph in input files.
+
+# updated 12192024
+
+Uploaded [rag-with-llama-and-faiss.ipynb](./rag-with-llama-and-faiss.ipynb). 
+
+Following changes are mode:
+
+1. moved to FAISS vector database. FAISS naturally supports both image and text input.
+2. removed pdf imput
+3. fixed the code that builds the vector database every time when perfroming a search. Now it takes 3-8s to give a response.
+4. added choices for using RAG or not, so user can compare. Picture of the interface will be added soon.
+
