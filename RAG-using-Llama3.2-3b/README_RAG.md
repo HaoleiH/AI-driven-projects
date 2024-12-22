@@ -1,6 +1,7 @@
 # RAG using Llama3.2-3b
+[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite) 
+[![Open in Kaggle](https://img.shields.io/badge/open_in_Kaggle-blue?style=flat&logo=kaggle)](https://www.kaggle.com/code/haoleihui/cp-rag-llms)
 
-[Open in Kaggle](https://www.kaggle.com/code/haoleihui/cp-rag-llms)
 # How it works
 
 [![theory](RAG_theory.png)](https://x.com/akshay_pachaar/status/1816088897505615925)
@@ -32,8 +33,8 @@ Following changes are made:
 4. added choices for using RAG or not, so user can compare. Picture of the interface will be added soon.
 
 # updated 12212024
-[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite)  
-[Open in Kaggle](https://www.kaggle.com/code/haoleihui/huggingface-website-successful)
+[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite)
+[![open in Kaggle](https://img.shields.io/badge/open_in_Kaggle-blue?style=flat&logo=kaggle)](https://www.kaggle.com/code/haoleihui/huggingface-website-successful)
 
 Following changes are made:
 1. uploaded [RAG-on-hugging-face.ipynb](RAG-on-hugging-face.ipynb)
