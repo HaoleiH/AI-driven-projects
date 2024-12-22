@@ -3,7 +3,9 @@ this repo contains some codes writen with the help of large language models like
 
 ## RAG using Llama3.2-3b
 
-[Open in Kaggle](https://www.kaggle.com/code/haoleihui/cp-rag-llms)
+[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite) 
+
+Use Retrieval-Augmented Generation of large language models to build a chatbot, so that it can answer questions in specific field based on papers provided.
 
 Details in [README_RAG.md](./RAG-using-Llama3.2-3b/README_RAG.md)
 
