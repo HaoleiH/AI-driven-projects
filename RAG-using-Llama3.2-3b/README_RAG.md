@@ -24,10 +24,22 @@ pdf input
 
 Uploaded [rag-with-llama-and-faiss.ipynb](./rag-with-llama-and-faiss.ipynb). 
 
-Following changes are mode:
+Following changes are made:
 
 1. moved to FAISS vector database. FAISS naturally supports both image and text input.
 2. removed pdf imput
 3. fixed the code that builds the vector database every time when perfroming a search. Now it takes 3-8s to give a response.
 4. added choices for using RAG or not, so user can compare. Picture of the interface will be added soon.
+
+# updated 12212024
+[![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite)  
+[Open in Kaggle](https://www.kaggle.com/code/haoleihui/huggingface-website-successful)
+
+Following changes are made:
+1. uploaded [RAG-on-hugging-face.ipynb](RAG-on-hugging-face.ipynb)
+2. modified code so that it can run on huggingface spaces with hugginface tokens. The main difference is that now the large language models is accessed by hugging face Serverless Inference API, not running locally. click [![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite) to see the demo. It should be running all the time.
+
+here is a screenshot of the demo.
+![demo](huggingface_demo.png)
+
 
