@@ -21,7 +21,7 @@ This is one of the foundational components of a scientific Retrieval-Augmented G
 
 ## MinerU to convert pdf to markdown
 
-[Open in Kaggle](https://www.kaggle.com/code/haoleihui/mineru-test)
+[![Open in Kaggle](https://img.shields.io/badge/open_in_Kaggle-blue?style=flat&logo=kaggle)](https://www.kaggle.com/code/haoleihui/mineru-test)
 
 Hosting a notebook in kaggle to convert scientific papers from human-readable pdf files to machine-readable markdown files by using [MinerU](https://github.com/opendatalab/MinerU). Kaggle provides resources like free CPU and 30 hours GPU per week so it is good for testing and sharing. One example of conversion is shown in [kaggle-MinerU](./kaggle-MinerU/test1.md). Now the notebook is purely running on CPU fore testing and is a little slow. The GPU acceleration will be added in the furture. Or you can check MinerU's official [documentation](https://github.com/opendatalab/MinerU?tab=readme-ov-file#using-gpu) if you want to develop your own code to enable GPU acceleration.
 
