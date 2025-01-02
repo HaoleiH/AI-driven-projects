@@ -2,6 +2,8 @@
 This repo contains some codes writen with the help of large language models like ChatGPT and Qwen.
 
 ## Find shared co-authors
+[![open in Kaggle](https://img.shields.io/badge/open_in_Kaggle-blue?style=flat&logo=kaggle)](https://www.kaggle.com/code/haoleihui/find-coauthor)
+
 [This file](./find-coauthor) shows one example to visualize the relations between two scientist by using google scholar data obtained by [scholarly](https://pypi.org/project/scholarly/). The graph is made by streamlit and streamli-agraph. The code is mainly writen with the help of chatgpt. I made a little modification on it to make it fit my expectation, which in principle could also be done by using proper prompt. Following prompt is used:
 
 ```
