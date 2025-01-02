@@ -12,9 +12,7 @@ create a web app by streamlit, user will input two names, use scholarly to find 
 
 Here is a video example.
 
-
-
-[video](https://github.com/user-attachments/assets/0d19236f-a8f0-42d5-b636-e468ecc17e50)
+[video](https://github.com/user-attachments/assets/2ed4e54b-bf2d-4082-8739-bf10050a83d8)
 
 
 
