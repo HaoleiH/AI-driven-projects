@@ -11,6 +11,7 @@ create a web app by streamlit, user will input two names, use scholarly to find 
 ```
 
 Here is a video example.
+[demo2.webm](https://github.com/user-attachments/assets/aa33906e-c074-4dc6-8078-b729012de97d)
 
 
 ## RAG using Llama3.2-3b
