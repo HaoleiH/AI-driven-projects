@@ -10,7 +10,7 @@ This repo contains some codes writen with the help of large language models like
 create a web app by streamlit, user will input two names, use scholarly to find coauthor of the two names, use proxy to avoid getting banned, create flowchart by streamlit-agraph to show the connection between the two names and  their coauthors, if they share same coauthors, show them in a different color in the flowchart
 ```
 
-Here is a video example.
+Here is a video example. For details, [check this](./find_shared_coauthors/find_coauthor_readme.md)
 
 [video](https://github.com/user-attachments/assets/2ed4e54b-bf2d-4082-8739-bf10050a83d8)
 
