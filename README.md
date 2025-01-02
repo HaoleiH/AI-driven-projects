@@ -1,6 +1,16 @@
 # AI-driven-projects
 This repo contains some codes writen with the help of large language models like ChatGPT and Qwen.
 
+## Find shared co-authors
+[This file](./find-coauthor) shows one example to visualize the relations between two scientist by using google scholar data obtained by [scholarly](https://pypi.org/project/scholarly/). The graph is made by streamlit and streamli-agraph. The code is mainly writen with the help of chatgpt. I made a little modification on it to make it fit my expectation, which in principle could also be done by using proper prompt. Following prompt is used:
+
+```
+create a web app by streamlit, user will input two names, use scholarly to find coauthor of the two names, use proxy to avoid getting banned, create flowchart by streamlit-agraph to show the connection between the two names and  their coauthors, if they share same coauthors, show them in a different color in the flowchart
+```
+
+Here is a video example.
+
+
 ## RAG using Llama3.2-3b
 
 [![hfspace](https://img.shields.io/badge/🤗-Space%20demo-yellow)](https://huggingface.co/spaces/holyhigh666/RAG-chalcogenide-perovskite) 
