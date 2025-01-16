@@ -3,7 +3,15 @@ This repo contains some codes writen with the help of large language models like
 
 ## Line plot digitizer
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/line_plot_digitizer/graph_digitizer.ipynb)
 
+This notebook showed a method to extract data points from certain color line plot. Some intermediate results are shown below.
+
+find labels with paddle OCR
+![image1](./line_plot_digitizer/result1.jpg)
+
+compare final result with original graph
+![image1](./line_plot_digitizer/result2.png)
 
 
 
