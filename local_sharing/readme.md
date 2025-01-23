@@ -35,3 +35,7 @@ download app.py and public, put them in same directory, directly run
 > python app.py
 
 then the webserver is running.
+
+# result
+
+![screenshot](./Screenshot1.png)
