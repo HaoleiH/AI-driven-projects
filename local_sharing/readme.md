@@ -1,6 +1,6 @@
 # how to use
 
-download [all-in-one.zip](https://github.com/HaoleiH/AI-driven-projects/releases/tag/v0.2). this zip file contains a portable python environment and the code need to start the local website.
+download [all-in-one.zip](https://github.com/HaoleiH/AI-driven-projects/releases/tag/v0.2). this zip file contains a portable python environment and the coded need to start the local website.
 
 unzip. double-click message.bat, give permission to python.exe in the pop-up window.
 
@@ -30,7 +30,7 @@ make sure you have flask installed, or
 
 > pip install flask
 
-download app.py and public, put them in same directory, directly run 
+download app.py and public, put them in the same directory, directly run 
 
 > python app.py
 
