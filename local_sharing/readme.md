@@ -20,7 +20,7 @@ That said, I’ve provided a solution if you need to address this. Check the app
 ------
 </details>
 
-download [all-in-one.zip](https://github.com/HaoleiH/AI-driven-projects/releases/tag/v0.2). this zip file contains a portable python environment and the code needed to start the local website. This all-in-one.zip file only works on windows.
+download [all-in-one.zip](https://github.com/HaoleiH/AI-driven-projects/releases/download/v0.3/all-in-one.zip). this zip file contains a portable python environment and the code needed to start the local website. This all-in-one.zip file only works on windows.
 
 unzip. double-click Run_This.bat, give permission to python.exe in the pop-up window.
 
