@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exchange message</title>
+  <link rel="shortcut icon" href="favicon-32x32.png">
+  <style>
+    /* General body styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Main container */
+    #container {
+      width: 100%;
+      max-width: 500px;
+      height: 90%;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Authentication container */
+    #auth-container {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Chat container */
+    #chat-container {
+      display: none;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    /* Header */
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #555;
+    }
+
+    /* Chat box */
+    #chat-box {
+      flex-grow: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #f4f4f9;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Chat message bubbles */
+    .message {
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      word-wrap: break-word;
+    }
+
+    .message.text {
+      background-color: #e1f7d5;
+      color: #333;
+      align-self: flex-start;
+    }
+
+    .message.image {
+      align-self: flex-start;
+    }
+
+    .message.self {
+      background-color: #007bff;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .message img {
+      max-width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Input section */
+    #input-container {
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      background: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    #text-input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    #text-input:focus {
+      border-color: #007bff;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Scrollbar */
+    #chat-box::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #chat-box::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 4px;
+    }
+
+    #chat-box::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Authentication -->
+    <div id="auth-container">
+      <h1>Enter Password</h1>
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="authenticate()">Login</button>
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chat-container">
+      <div id="chat-box"></div>
+      <div id="input-container">
+        <input type="text" id="text-input" placeholder="Type a message">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+    const chatContainer = document.getElementById('chat-container');
+    const authContainer = document.getElementById('auth-container');
+    const textInput = document.getElementById('text-input');
+
+    // Check if the user is already authenticated
+    if (localStorage.getItem('authenticated') === 'true') {
+      authContainer.style.display = 'none';
+      chatContainer.style.display = 'flex';
+      loadChat();
+    }
+
+    // Authenticate user
+    function authenticate() {
+      const password = document.getElementById('password').value;
+      fetch('/authenticate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      }).then(response => {
+        if (response.ok) {
+          localStorage.setItem('authenticated', 'true');
+          authContainer.style.display = 'none';
+          chatContainer.style.display = 'flex';
+          loadChat();
+        } else {
+          alert('Incorrect password');
+        }
+      });
+    }
+
+    // Load existing chat data
+    function loadChat() {
+      fetch('/load')
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(item => {
+            if (item.type === 'text') {
+              addMessage(item.content, false);
+            } else if (item.type === 'image') {
+              addImage(item.url, false);
+            }
+          });
+        });
+    }
+
+    // Save chat data
+    function saveChat() {
+      const data = Array.from(chatBox.children).map(child => {
+        if (child.classList.contains('image')) {
+          const img = child.querySelector('img');
+          return { type: 'image', url: img.src };
+        }
+        return { type: 'text', content: child.textContent };
+      });
+      fetch('/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
+
+    // Add message to chat
+    function addMessage(content, isSelf = true) {
+      const message = document.createElement('div');
+      message.className = `message text ${isSelf ? 'self' : ''}`;
+      message.textContent = content;
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Add image to chat
+    function addImage(url, isSelf = true) {
+      const message = document.createElement('div');
+      message.className = `message image ${isSelf ? 'self' : ''}`;
+      const img = document.createElement('img');
+      img.src = url;
+      img.onclick = () => window.open(url, '_blank');
+      message.appendChild(img);
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Send message
+    function sendMessage() {
+      const input = document.getElementById('text-input');
+      if (input.value.trim()) {
+        addMessage(input.value);
+        input.value = '';
+        saveChat();
+      }
+    }
+
+    // Paste images
+    document.addEventListener('paste', (e) => {
+      const items = e.clipboardData.items;
+      for (let item of items) {
+        if (item.type.startsWith('image/')) {
+          const blob = item.getAsFile();
+          const formData = new FormData();
+          formData.append('image', blob, 'pasted-image.png');
+          uploadImage(formData);
+        }
+      }
+    });
+
+    // Upload image
+    function uploadImage(formData) {
+      // Generate a unique filename using timestamp
+      const timestamp = new Date().getTime();
+      const originalFilename = formData.get('image').name;
+      const fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.'));
+      const uniqueFilename = `pasted-image-${timestamp}${fileExtension}`;
+
+      // Create a new Blob with the unique filename
+      const blob = formData.get('image');
+      const newFile = new File([blob], uniqueFilename, { type: blob.type });
+
+      // Create a new FormData with the unique file
+      const newFormData = new FormData();
+      newFormData.append('image', newFile);
+
+      fetch('/upload', { method: 'POST', body: newFormData })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            addImage(data.url);
+            saveChat();
+          }
+        });
+    }
+
+    // Allow sending message with Enter key
+    textInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
