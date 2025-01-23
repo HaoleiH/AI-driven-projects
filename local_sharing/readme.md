@@ -30,14 +30,14 @@ DO NOT delete public.
 
 make sure you have flask installed, or
 
-```
+```bash
  pip install flask
 ```
 
 download app.py and public, put them in the same directory, directly run 
 
-```
-python app.py
+```bash
+ python app.py
 ```
 
 This method should work on all platforms.
