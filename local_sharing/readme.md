@@ -43,6 +43,12 @@ download app.py and public, put them in the same directory, directly run
 This method should work on all platforms.
 then the webserver is running.
 
-# result
+# warning
+
+This web app creates a server that listens for online requests, not just those from the local network. However, during testing in various scenarios, I found that it could only be accessed from the local network. I suspect this is due to router settings. For now, this behavior meets my needs, so I haven’t investigated further.
+
+That said, I’ve provided a solution if you need to address this. Check the app.py file, lines 15 to 30, where you can configure the app to allow access only from authorized IPs. While a simple password protection mechanism should suffice, please use it at your own risk. Additionally, don’t forget to stop the server when it’s not in use(simply close the cmd window).
+
+# screenshot
 
 ![screenshot](./Screenshot1.png)
