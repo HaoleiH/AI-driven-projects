@@ -6,7 +6,7 @@ unzip. double-click message.bat, give permission to python.exe in the pop-up win
 
 you will see it running on 3 addresses. 
 use the last one, the one below "http://127.0.0.1:5000".
-any device in local network should be able to visit that address.
+any device in local network should be able to visit that address. don't forget to close the server while not using. 
 
 the default password is 2887,
 you can change it in app.py
