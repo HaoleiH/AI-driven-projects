@@ -13,7 +13,7 @@ General procedures are:
 Some intermediate results are shown below.
 
 find labels with paddle OCR
-![image1](./line_plot_digitizer/result1.jpg)
+![image1](./result1.jpg)
 
 compare final result with original graph
-![image1](./line_plot_digitizer/result2.png)
+![image1](./result2.png)
