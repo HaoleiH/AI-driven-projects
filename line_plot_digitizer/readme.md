@@ -1,7 +1,7 @@
 # Line plot digitizer
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/HaoleiH/AI-driven-projects/blob/main/line_plot_digitizer/graph_digitizer.ipynb)
-[![hfspace](https://img.shields.io/badge/🤗-Huggingface%20Demo-yellow)](https://huggingface.co/spaces/holyhigh666/graph-digitizer)
+[![hfspace](https://img.shields.io/badge/🤗%20Hugging%20face-Demo-blue)](https://huggingface.co/spaces/holyhigh666/graph-digitizer)
 
 
 
